@@ -1,0 +1,53 @@
+<ion-header [hidden]="isLoaded">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Chatbot</ion-title>
+  </ion-toolbar>
+</ion-header>
+  <div id="part1" [hidden]="isLoaded">
+    <ion-content >
+  <ion-list>
+    <ion-item *ngFor="let item of conversation">
+      <div id="msg">
+      <div id={{item.type}}>{{item.value}}<p id="time">{{item.time}} </p></div>
+    </div>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)" position="top" *ngIf="verif">
+    <ion-infinite-scroll-content>
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  </ion-content>
+</div>
+<div id="lang" [hidden]="isLoaded">
+  <ion-button (click)="lang('TN')"  *ngIf="verifLng">
+    <ion-img src='assets/icon/tunisia.png' ></ion-img>
+  </ion-button>
+  <ion-button (click)="changeLanguage('yes')" *ngIf="newChoice">
+    <ion-img src='assets/icon/accept.png' ></ion-img>
+  </ion-button>
+  <ion-button (click)="lang('FR')"  *ngIf="verifLng">
+    <ion-img src='assets/icon/france.png' ></ion-img>
+  </ion-button>
+  <ion-button (click)="changeLanguage('no')" *ngIf="newChoice">
+    <ion-img src='assets/icon/remove.png' ></ion-img>
+  </ion-button>
+  <ion-button (click)="lang('EN')"  *ngIf="verifLng">
+    <ion-img src='assets/icon/united-kingdom.png' ></ion-img>
+  </ion-button>
+</div>
+<div id="part2" [hidden]="isLoaded">
+  <div id="part21">
+<ion-textarea [(ngModel)]="chat" [disabled]="verifLng" [disabled]="newChoice" (keyup.enter)="chatbot()"></ion-textarea>
+  </div>
+  <div id="part22">
+    <ion-button  (click)="chatbot()" [disabled]="verifLng" [disabled]="newChoice" >
+      <ion-icon name="arrow-redo-outline"></ion-icon>
+    </ion-button>
+  </div>
+</div>
+<ion-content>
+
+  </ion-content>

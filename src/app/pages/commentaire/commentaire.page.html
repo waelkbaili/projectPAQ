@@ -1,0 +1,44 @@
+<ion-header [hidden]="isLoaded">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{dataService.doTranslate("comment")}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<div class="part1" [hidden]="isLoaded">
+  <ion-content>
+    <ion-list>
+      <ion-item *ngFor="let item of items">
+        <ion-label>
+          <h2>{{item.createur}}</h2>
+          <p>{{item.commentaire}}</p>
+          <h3>{{item.created_at}}</h3>
+        </ion-label>
+  </ion-item>
+    </ion-list>
+
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="Loading more data...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-content>
+
+</div>
+
+<div id="part2" [hidden]="isLoaded">
+  <div id="part21">
+    <h2>{{dataService.doTranslate("your comment")}} </h2>
+<ion-textarea  [placeholder]=commentholder [(ngModel)]="comment" (keyup.enter)="addComment()"></ion-textarea>
+  </div>
+  <div id="part22">
+    <ion-button (click)="addComment()" >
+      <ion-icon name="arrow-redo-outline"></ion-icon>
+    </ion-button>
+  </div>
+</div>
+<ion-content>
+
+</ion-content>

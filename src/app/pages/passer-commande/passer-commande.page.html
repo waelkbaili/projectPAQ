@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{dataService.doTranslate("order")}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h2 *ngIf="verif">{{dataService.doTranslate("basket contents")}}</h2>
+  <div *ngIf="!verif">
+    <p *ngIf="!verif">{{dataService.doTranslate("your basket is empty")}}</p>
+  </div>
+
+  <ion-grid *ngIf="verif">
+    <ion-row class="back">
+      <ion-col size="4">{{dataService.doTranslate("plate name")}}</ion-col>
+      <ion-col size="2">{{dataService.doTranslate("plate number")}}</ion-col>
+      <ion-col size="2">{{dataService.doTranslate("price unit")}}</ion-col>
+      <ion-col size="2">{{dataService.doTranslate("total price")}}</ion-col>
+      <ion-col size="2">{{dataService.doTranslate("delete")}}</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let cmd of cmds">
+    <ion-col size="4">{{cmd.name}}</ion-col>
+    <ion-col size="2">{{cmd.platNumber}}</ion-col>
+    <ion-col size="2">{{cmd.priceUnt}}</ion-col>
+    <ion-col size="2">{{cmd.pricetot}}</ion-col>
+    <ion-col size="2">
+      <ion-button size="small" color="danger" (click)="deletePlat(cmd.idCuistot,cmd.idFood)">
+        <ion-icon  slot="icon-only" name="trash-outline" ></ion-icon>
+      </ion-button>
+    </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">{{dataService.doTranslate("total price")}}</ion-col>
+      <ion-col size="6">{{montant}} D+ 6 D {{dataService.doTranslate("delivery")}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">  <ion-textarea rows="3" cols="10" maxlength="40" placeholder="Enter any remarks here..." [(ngModel)]="notes" value=""></ion-textarea></ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-radio-group [(ngModel)]="choix" (ionChange)="valueChanged()" *ngIf="verif">
+    <ion-list-header>
+      <ion-label>{{dataService.doTranslate("client address")}}</ion-label>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>{{dataService.doTranslate("get address from your device")}}</ion-label>
+      <ion-radio slot="start" value="auto"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>{{dataService.doTranslate("write address manually")}}</ion-label>
+      <ion-radio slot="start" value="man"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+  <ion-textarea rows="3" cols="10" maxlength="80" placeholder="Enter your addresse here..." [(ngModel)]="adrgps"
+   value="" [readonly]=readonly *ngIf="verif"></ion-textarea>
+  <ion-button expand="block" (click)="passerCommande()" *ngIf="verif">{{dataService.doTranslate("order")}}</ion-button>
+</ion-content>

@@ -1,0 +1,38 @@
+<ion-header [hidden]="isLoaded">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{dataService.doTranslate("statistics")}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [hidden]="isLoaded">
+  <div id="part1">
+    <h4>Nombres de plats vendus</h4>
+    <ion-select [placeholder]=mounthHolder interface="popover" (ionChange)="change()" [(ngModel)]="newSelector">
+      <ion-select-option value="week">{{dataService.doTranslate("week")}} </ion-select-option>
+      <ion-select-option value="mounth">{{dataService.doTranslate("mounth")}}</ion-select-option>
+    </ion-select>
+    <ion-select [placeholder]=weekHolder interface="popover"
+      (ionChange)="changeWeek()" [(ngModel)]="newWeek" *ngIf="verif">
+      <ion-select-option value="1"> 1-4</ion-select-option>
+      <ion-select-option value="2"> 5-8</ion-select-option>
+      <ion-select-option value="3"> 9-12</ion-select-option>
+      <ion-select-option value="4"> 13-16</ion-select-option>
+      <ion-select-option value="5"> 17-20</ion-select-option>
+      <ion-select-option value="6"> 21-24</ion-select-option>
+      <ion-select-option value="7"> 25-28</ion-select-option>
+      <ion-select-option value="8"> 29-32</ion-select-option>
+      <ion-select-option value="9"> 33-36</ion-select-option>
+      <ion-select-option value="10"> 37-40</ion-select-option>
+      <ion-select-option value="11"> 41-44</ion-select-option>
+      <ion-select-option value="12"> 45-48</ion-select-option>
+      <ion-select-option value="13"> 49-52</ion-select-option>
+    </ion-select>
+  </div>
+  <div id="part2">
+    <canvas #barCanvas height="30vh" width="80vw" responsive="false"></canvas>
+  </div>
+
+</ion-content>

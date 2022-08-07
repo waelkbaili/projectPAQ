@@ -1,0 +1,87 @@
+<ion-menu side="end" content-id="main-content" [hidden]="isLoaded">
+  <ion-header>
+    <ion-toolbar translucent color="primary">
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content >
+    <ion-list>
+      <ion-item (click)="personalData(id)" >
+        <ion-icon name="person-outline" slot="start"></ion-icon>
+        <ion-label>{{dataService.doTranslate('profile')}}</ion-label>
+      </ion-item>
+      <ion-item (click)="detailsuser(id)">
+        <ion-icon name="fast-food-outline" slot="start"></ion-icon>
+        <ion-label>{{dataService.doTranslate('list of dishes')}}</ion-label>
+      </ion-item>
+      <ion-item (click)="livraison(id)">
+        <ion-icon name="arrow-redo-outline" slot="start"></ion-icon>
+         <ion-label>{{dataService.doTranslate('delivery list')}}</ion-label>
+      </ion-item>
+      <ion-item (click)="historique(id)">
+        <ion-icon name="calendar-number-outline" slot="start"></ion-icon>
+        <ion-label>{{dataService.doTranslate('history of my orders')}}</ion-label>
+      </ion-item>
+      <ion-item (click)="chatbot(id)">
+        <ion-icon name="chatbubble-ellipses-outline" slot="start"></ion-icon>
+        <ion-label>Chatbot</ion-label>
+      </ion-item>
+      <ion-item (click)="params()">
+        <ion-icon name="settings-outline" slot="start"></ion-icon>
+        <ion-label>{{dataService.doTranslate('settings')}}</ion-label>
+      </ion-item>
+      <ion-item (click)="stat(id)">
+        <ion-icon name="stats-chart-outline" slot="start"></ion-icon>
+        <ion-label>{{dataService.doTranslate('statistics')}}</ion-label>
+      </ion-item>
+      <ion-item (click)="presentAlert()">
+        <ion-icon name="exit" slot="start"></ion-icon>
+        <ion-label>{{dataService.doTranslate('logout')}}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<div class="ion-page" id="main-content" [hidden]="isLoaded">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="end">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>{{dataService.doTranslate('welcome')}} {{name}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-searchbar [(ngModel)]="filterTerm" animated="true" [placeholder]=search></ion-searchbar>
+    <h4>{{dataService.doTranslate('list of cooks by region')}}</h4>
+    <ion-select placeholder={{country}} okText="Okay" cancelText="Dismiss" class="choix" (ionChange)="change()" [(ngModel)]="newCountry">
+          <ion-select-option value="tunis">Tunis </ion-select-option>
+          <ion-select-option value="sfax">Sfax</ion-select-option>
+          <ion-select-option value="kairouan">Kairouan</ion-select-option>
+    </ion-select>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content
+        pullingIcon="chevron-down-circle-outline"
+        pullingText="Pull to refresh"
+        refreshingSpinner="circles">
+      </ion-refresher-content>
+    </ion-refresher>
+
+    <ion-list>
+      <ion-item-sliding *ngFor="let user of users | filter:filterTerm">
+        <ion-item (click)="detailsuser(user.id)" *ngIf="user.id !== id">
+          <ion-label>{{user.name}}</ion-label>
+          <img src="assets/icon/rating1.png"  slot="end" *ngIf="user.rate<=1">
+          <img src="assets/icon/rating2.png"  slot="end" *ngIf="user.rate>1 && user.rate<=2">
+          <img src="assets/icon/rating3.png"  slot="end" *ngIf="user.rate>2 && user.rate<=3">
+          <img src="assets/icon/rating4.png"  slot="end" *ngIf="user.rate>3 && user.rate<=4">
+          <img src="assets/icon/rating5.png"  slot="end" *ngIf="user.rate>4">
+        </ion-item>
+      </ion-item-sliding>
+    </ion-list>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-content>
+</div>

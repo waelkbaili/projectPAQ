@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <form [formGroup]="loginForm" (ngSubmit)="tryLogin()" novalidate>
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">email</ion-label>
+      <ion-input type="text" formControlName="email_address" (keyup.enter)="tryLogin()"></ion-input>
+    </ion-item>
+    <span class="error-ion-padding" *ngIf=" !isValid && errorCtr.email_address.errors?.required">
+      {{dataService.doTranslate("required")}}
+    </span>
+    <ion-item>
+      <ion-label position="floating"> {{dataService.doTranslate("password")}}</ion-label>
+      <ion-input type="password" formControlName="password" (keyup.enter)="tryLogin()"></ion-input>
+    </ion-item>
+    <span class="error-ion-padding" *ngIf=" !isValid && errorCtr.password.errors?.required">
+      {{dataService.doTranslate("required")}}
+    </span>
+    <ion-button expand="block" color="primary" class="no-padding" type="submit">login</ion-button>
+    <p >{{dataService.doTranslate("if you don't have account")}} <span (click)=tryRegister() >
+      {{dataService.doTranslate("sign up")}}</span></p>
+  </ion-list>
+  </form>
+
+</ion-content>

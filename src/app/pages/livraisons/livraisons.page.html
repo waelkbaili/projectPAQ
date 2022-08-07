@@ -1,0 +1,85 @@
+<ion-header [hidden]="isLoaded">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{dataService.doTranslate('delivery list')}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [hidden]="isLoaded">
+  <h2>{{dataService.doTranslate("today's deliveries")}}</h2>
+  <div *ngFor="let cmd of livraisonsToday">
+    <ion-grid>
+      <ion-row class="back">
+        <ion-col > <ion-label>{{dataService.doTranslate("client name")}}</ion-label></ion-col>
+        <ion-col > <ion-label> {{dataService.doTranslate("order date")}}</ion-label></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col > <ion-label> {{cmd.client}}</ion-label></ion-col>
+        <ion-col > <ion-label> {{cmd.time}}</ion-label></ion-col>
+      </ion-row>
+      <ion-row class="back">
+        <ion-col > <ion-label> {{dataService.doTranslate("plate name")}}</ion-label></ion-col>
+        <ion-col > <ion-label> {{dataService.doTranslate("plate number")}}</ion-label></ion-col>
+        <ion-col > <ion-label> {{dataService.doTranslate("rate")}}</ion-label></ion-col>
+      </ion-row>
+        <ion-row *ngFor="let plt of cmd.plat">
+        <ion-col > <ion-label> {{plt.name}}</ion-label></ion-col>
+        <ion-col > <ion-label> {{plt.nbr}}</ion-label></ion-col>
+        <ion-col > <ion-label> {{plt.rate}}</ion-label></ion-col>
+        </ion-row>
+        <ion-row class="back">
+          <ion-col > <ion-label> {{dataService.doTranslate("remarks")}}</ion-label></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col > <ion-label> {{cmd.note}}</ion-label></ion-col>
+        </ion-row>
+        <ion-row class="back">
+          <ion-col > <ion-label> {{dataService.doTranslate("customer address")}}</ion-label></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col > <ion-label> {{cmd.clientaddress}}</ion-label></ion-col>
+          <ion-col > <ion-button (click)="showMap(cmd.clientaddress)"> {{dataService.doTranslate("show on map")}}</ion-button></ion-col>
+        </ion-row>
+      </ion-grid>
+  </div>
+  <h2>{{dataService.doTranslate("old deliveries")}}</h2>
+  <div *ngFor="let cmd of livraisonsold">
+    <ion-grid>
+      <ion-row class="back">
+        <ion-col > <ion-label>{{dataService.doTranslate("client name")}}</ion-label></ion-col>
+        <ion-col > <ion-label> {{dataService.doTranslate("order date")}}</ion-label></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col > <ion-label> {{cmd.client}}</ion-label></ion-col>
+        <ion-col > <ion-label> {{cmd.time}}</ion-label></ion-col>
+      </ion-row>
+      <ion-row class="back">
+        <ion-col > <ion-label> {{dataService.doTranslate("plate name")}}</ion-label></ion-col>
+        <ion-col > <ion-label> {{dataService.doTranslate("plate number")}}</ion-label></ion-col>
+        <ion-col > <ion-label> {{dataService.doTranslate("rate")}}</ion-label></ion-col>
+      </ion-row>
+        <ion-row *ngFor="let plt of cmd.plat">
+        <ion-col > <ion-label> {{plt.name}}</ion-label></ion-col>
+        <ion-col > <ion-label> {{plt.nbr}}</ion-label></ion-col>
+        <ion-col > <ion-label> {{plt.rate}}</ion-label></ion-col>
+        </ion-row>
+        <ion-row class="back">
+          <ion-col > <ion-label> {{dataService.doTranslate("remarks")}}</ion-label></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col > <ion-label> {{cmd.note}}</ion-label></ion-col>
+        </ion-row>
+        <ion-row class="back">
+          <ion-col > <ion-label> {{dataService.doTranslate("customer address")}}</ion-label></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col > <ion-label> {{cmd.clientaddress}}</ion-label></ion-col>
+          <ion-col > <ion-button (click)="showMap(cmd.clientaddress)"> {{dataService.doTranslate("show on map")}}</ion-button></ion-col>
+        </ion-row>
+
+      </ion-grid>
+  </div>
+
+</ion-content>

@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button (click)="cleardata()" text="" ></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="!isUpdate">{{dataService.doTranslate("add plate")}}</ion-title>
+    <ion-title *ngIf="isUpdate">{{dataService.doTranslate("update plate")}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+<form [formGroup]="addPlatForm" novalidate>
+  <ion-list id="list">
+    <ion-item>
+      <ion-label position="floating">{{dataService.doTranslate("plate name")}}</ion-label>
+      <ion-input type="text" formControlName="plat_name" ></ion-input>
+    </ion-item>
+    <span class="error-ion-padding" *ngIf=" !isValid && errorCtr.plat_name.errors?.required">
+      {{dataService.doTranslate("required")}}
+    </span>
+    <ion-item>
+      <ion-label position="floating">{{dataService.doTranslate("description")}}</ion-label>
+      <ion-textarea formControlName="description" position="stacked"></ion-textarea>
+    </ion-item>
+    <span class="error-ion-padding" *ngIf=" !isValid && errorCtr.description.errors?.required">
+      {{dataService.doTranslate("required")}}
+    </span>
+    <ion-item>
+      <ion-label position="floating">{{dataService.doTranslate("price")}}</ion-label>
+      <ion-input type="number" formControlName="price"></ion-input>
+    </ion-item>
+    <span class="error-ion-padding" *ngIf=" !isValid && errorCtr.price.errors?.required">
+      {{dataService.doTranslate("required")}}
+    </span>
+    <ion-item>
+      <ion-label position="floating">{{dataService.doTranslate("plate number")}}</ion-label>
+      <ion-input type="number" formControlName="plat_number"></ion-input>
+    </ion-item>
+    <span class="error-ion-padding" *ngIf=" !isValid && errorCtr.plat_number.errors?.required">
+      {{dataService.doTranslate("required")}}
+    </span>
+    <ion-item>
+      <ion-label style="color:#999" position="floating">{{dataService.doTranslate("type")}}</ion-label>
+      <ion-select  interface="popover" formControlName="type">
+        <ion-select-option value="tunisie">{{dataService.doTranslate("tunisia")}}</ion-select-option>
+        <ion-select-option value="france">{{dataService.doTranslate("french")}}</ion-select-option>
+        <ion-select-option value="chine">{{dataService.doTranslate("china")}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <span class="error-ion-padding" *ngIf=" !isValid && errorCtr.type.errors?.required">
+      {{dataService.doTranslate("required")}}
+    </span>
+    <ion-item>
+      <ion-label position="floating">{{dataService.doTranslate("link (optional)")}}</ion-label>
+      <ion-input type="text" formControlName="link" placeholder={{dataService.doTranslate(placeholder)}}></ion-input>
+    </ion-item>
+
+  </ion-list>
+  <div id="full">
+    <div id="part1">
+      <img src={{img}}/>
+    </div>
+    <div id="part2">
+      <ion-button (click)="getCamera()">{{dataService.doTranslate("camera")}}</ion-button>
+      <ion-button (click)="getGallery()">{{dataService.doTranslate("gallery")}}</ion-button>
+    </div>
+    <div id="part3">
+      <ion-button expand="block" color="primary" class="no-padding" (click)="addPlat()" *ngIf="!isUpdate">{{dataService.doTranslate("add plate")}}</ion-button>
+      <ion-button expand="block" color="primary" class="no-padding" (click)="updatePlat()" *ngIf="isUpdate">{{dataService.doTranslate("update plate")}}</ion-button>
+    </div>
+  </div>
+</form>
+</ion-content>

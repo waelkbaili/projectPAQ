@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{dataService.doTranslate('settings')}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-radio-group [(ngModel)]="choix" (ionChange)="valueChanged()">
+    <ion-list-header>
+      <ion-label>{{dataService.doTranslate('language translation')}}</ion-label>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>{{dataService.doTranslate('english')}}</ion-label>
+      <ion-radio slot="start" value="en"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{dataService.doTranslate('french')}}</ion-label>
+      <ion-radio slot="start" value="fr"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{dataService.doTranslate('arabic')}}</ion-label>
+      <ion-radio slot="start" value="ar"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+
+
+</ion-content>
